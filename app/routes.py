@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
 
 from app import app
 from app.static.test import testfunc
@@ -14,11 +15,12 @@ def tools():
 
 @app.route('/upload')
 def upload_form():
-    
+    return render_template('upload.html')
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     uploaded_file = request.files['file']
+    filename = secure_filename(uploaded_file.filename)
     if uploaded_file.filename != '':
-        uploaded_file.save(uploaded_file.filename)
+        uploaded_file.save(filename)
     return redirect(url_for('index'))

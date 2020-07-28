@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from flask_wtf.file import FileField
+from wtforms import SubmitField
 
 class UploadForm(FlaskForm):
-    file = ''
+    file = FileField('File')
+    submit = SubmitField('Submit')
