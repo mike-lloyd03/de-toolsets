@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 
 from app import app
 from app.static.test import testfunc
+from app.static.stick_slip_tools.filterTDMS import filter_and_interpolate_data
 
 @app.route('/')
 @app.route('/index')
@@ -23,4 +24,6 @@ def upload():
     filename = secure_filename(uploaded_file.filename)
     if uploaded_file.filename != '':
         uploaded_file.save(filename)
+        filter_and_interpolate_data(filename)
+        del(filename)
     return redirect(url_for('index'))

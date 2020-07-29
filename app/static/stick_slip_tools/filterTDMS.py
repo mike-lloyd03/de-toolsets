@@ -1,3 +1,4 @@
+from os import path
 import pandas as pd
 import numpy as np
 from pandas import ExcelWriter
@@ -5,7 +6,8 @@ from pandas import ExcelFile
 from nptdms import TdmsFile
 import matplotlib.pyplot as plt
 
-from make_group_plots import make_group_plots
+# from app.static.stick_slip_tools.make_group_plots import make_group_plots
+from .make_group_plots import make_group_plots
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
@@ -19,10 +21,11 @@ def filter_and_interpolate_data (path_to_file):
 
     '''
     print('Reading TDMS file...', end='\r')
-    tdms_file_name = path_to_file.split('/')[-1]
-    working_dir = '/'.join(path_to_file.split('/')[:-1])
+    tdms_file_name = path.splitext(path.basename(path_to_file))[0]
+    working_dir = path.relpath(path_to_file + '/../data_files')
     tdms_file = TdmsFile(path_to_file)
-    output_file = f'{working_dir}/Filtered Data/{tdms_file_name[0:-5]} Filtered'
+    # output_file = f'{working_dir}/{tdms_file_name[:-5]} Filtered'
+    output_file = path.join(working_dir, tdms_file_name + ' Filtered')
     data_blocks = ((0, 25), (490, 500), (990, 1000))
 
     test_number = tdms_file.properties['Test Number']
