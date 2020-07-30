@@ -1,3 +1,4 @@
+from os import path
 from flask import render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
@@ -22,7 +23,9 @@ def upload_form():
 def upload():
     uploaded_file = request.files['file']
     filename = secure_filename(uploaded_file.filename)
-    if uploaded_file.filename != '':
+    filename = path.join('app/data_files', filename)
+    print(filename)
+    if filename != '':
         uploaded_file.save(filename)
         filter_and_interpolate_data(filename)
         del(filename)
