@@ -22,7 +22,7 @@ def filter_and_interpolate_data (path_to_file):
 
     print('Reading TDMS file...', end='\r')
     tdms_file_name = path.splitext(path.basename(path_to_file))[0]
-    saving_dir = 'app/data_files'
+    saving_dir = path.dirname(path_to_file)
     tdms_file = TdmsFile(path_to_file)
     output_file = path.join(saving_dir, tdms_file_name + ' Filtered')
     data_blocks = ((0, 25), (490, 500), (990, 1000))
@@ -74,14 +74,18 @@ def filter_and_interpolate_data (path_to_file):
     output_plot.savefig(output_file + '.png')
     output_plot.close()
 
-    # Save the dataframes as separate worksheets in a new Excel file
-    print('Saving filtered Excel file...', end='\r')
-    with ExcelWriter(output_file + '.xlsx') as writer:
-        for df, name in zip(tdms_data, tdms_group_names):
-            df.to_excel(writer, sheet_name=name, index=False)
-        writer.save()
+    # # Save the dataframes as separate worksheets in a new Excel file
+    # print('Saving filtered Excel file...', end='\r')
+    # with ExcelWriter(output_file + '.xlsx') as writer:
+    #     for df, name in zip(tdms_data, tdms_group_names):
+    #         df.to_excel(writer, sheet_name=name, index=False)
+    #     writer.save()
 
     print(f"------{path_to_file} Complete------")
+
+    # output_img = path.join('stick_slip/data_files', path.basename(output_file + '.png'))
+    # print(output_img)
+    return output_file + '.png'
 
 if __name__=="__main__":
     input_file = ''
