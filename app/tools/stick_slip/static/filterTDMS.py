@@ -24,7 +24,7 @@ def filter_and_interpolate_data (path_to_file):
     tdms_file_name = path.splitext(path.basename(path_to_file))[0]
     saving_dir = path.dirname(path_to_file)
     tdms_file = TdmsFile(path_to_file)
-    output_file = path.join(saving_dir, tdms_file_name + ' Filtered')
+    output_file = path.join(saving_dir, tdms_file_name + '_Filtered')
     data_blocks = ((0, 25), (490, 500), (990, 1000))
 
     test_number = tdms_file.properties['Test Number']
@@ -83,9 +83,8 @@ def filter_and_interpolate_data (path_to_file):
 
     print(f"------{path_to_file} Complete------")
 
-    # output_img = path.join('stick_slip/data_files', path.basename(output_file + '.png'))
-    # print(output_img)
-    return output_file + '.png'
+    print(path.basename(output_file))
+    return path.basename(output_file) + '.png'
 
 if __name__=="__main__":
     input_file = ''
