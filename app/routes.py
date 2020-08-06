@@ -11,6 +11,9 @@ def index():
 
 @app.route('/tools')
 def tools():
-    tool_list = ['stick-slip']
+    tool_list = [
+        {'name': 'stick-slip', 'display_name': 'Stick Slip Testing'},
+        {'name': 'dcr-validator', 'display_name': 'DCR Validator'}
+    ]
     return render_template('tools.html', tool_list=tool_list)
 

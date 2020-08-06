@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
 {% block app_content %}
-<h3>Stick Slip Test Results</h3>
-<img src={{ url_for('.static',filename=output_img) }} /><br>
-<a href=#>Download Image</a><br>
-<a href='stick-slip'>New File</a><br>
+    <div class='container my-5'>
+        <div class='card shadow-sm text-center'>
+            <h5 class='card-header'>Stick Slip Test Results</h5>
+            <div class='card-body'>
+                <img src={{ url_for('.static',filename=output_img) }} class='img-fluid'/><br>
+                <a href={{ url_for('.static',filename=output_img) }} download class='btn btn-outline-primary m-2'>Download Image</a><br>
+                <a href='{{ url_for('.stick_slip_upload_form') }}' class='btn btn-outline-primary m-2'>New File</a><br>
+            </div>
+        </div>
+    </div>
 {% endblock %}

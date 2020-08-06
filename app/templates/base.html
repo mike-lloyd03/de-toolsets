@@ -2,12 +2,10 @@
 <html lang="en">
     <head>
         {% block head %}
-            <!-- Required meta tags -->
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
             {% block styles %}
-                <!-- Bootstrap CSS -->
                 {{ bootstrap.load_css() }}
             {% endblock %}
 
@@ -15,32 +13,31 @@
         {% endblock %}
     </head>
     <body>
-        <!-- Your page content -->
         {% block content %}
             {% block navbar %}
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
                     <a class="navbar-brand" href={{ url_for('index') }}>
-                        <img src={{ url_for('static', filename='RBC-Bearings-Logo.png') }} width='100' />
+                        <img src={{ url_for('static', filename='RBC-Bearings-Logo.png') }} width='100' style='filter: brightness(150%);'/>
                         DE Toolsets
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link" href={{ url_for('index') }}>Home </a>
-                            <a class="nav-item nav-link" href={{ url_for('tools') }}>Tools</a>
-                        </div>
+
+                    <div class="navbar-nav my-lg-0">
+                        <a class="nav-item nav-link" href={{ url_for('index') }}>Home </a>
+                        <a class="nav-item nav-link" href={{ url_for('tools') }}>Tools</a>
                     </div>
+
                 </nav>
             {% endblock %}
+
             {% block app_content %}
             {% endblock %}
+
         {% endblock %}
 
         {% block scripts %}
-            <!-- Optional JavaScript -->
             {{ bootstrap.load_js() }}
         {% endblock %}
+
     </body>
 </html>
