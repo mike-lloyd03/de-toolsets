@@ -23,6 +23,9 @@ def dcr_validator_results_view():
     wo_filename = secure_filename(wo_file.filename)
     dcr_filename = secure_filename(dcr_file.filename)
     if wo_filename != '' and dcr_filename != '':
+        static_temp_dir = os.path.join(bp.static_folder, 'temp')
+        if not os.path.isdir(static_temp_dir):
+            os.mkdir(static_temp_dir)
         wo_filename = os.path.join(bp.static_folder, 'temp/' + wo_filename)
         dcr_filename = os.path.join(bp.static_folder, 'temp/' + dcr_filename)
         wo_file.save(wo_filename)
