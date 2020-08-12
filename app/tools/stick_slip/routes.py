@@ -21,6 +21,9 @@ def stick_slip_results_view():
     uploaded_file = request.files['file']
     filename = secure_filename(uploaded_file.filename)
     if filename != '':
+        static_temp_dir = os.path.join(bp.static_folder, 'temp')
+        if not os.path.isdir(static_temp_dir):
+            os.mkdir(static_temp_dir)
         filename = os.path.join(bp.static_folder, 'temp/' + filename)
         uploaded_file.save(filename)
         output_img = filter_and_interpolate_data(filename)
