@@ -2,6 +2,13 @@ import os
 import pandas as pd
 
 def dcr_validator(wo_file, dcr_file):
+    '''
+    Joins two spreadsheets on TDC PN and saves that file to disc.
+
+    Returns: name of the output file
+    '''
+    pd.options.mode.chained_assignment = None  # default='warn'
+
     wo_data = pd.read_excel(wo_file, header=[0, 1])
     wo_data.columns = [
                         f'{i+" " if "Unnamed" not in i else ""}{j}'

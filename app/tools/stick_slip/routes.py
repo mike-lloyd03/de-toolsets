@@ -24,11 +24,10 @@ def stick_slip_results_view():
         static_temp_dir = os.path.join(bp.static_folder, 'temp')
         if not os.path.isdir(static_temp_dir):
             os.mkdir(static_temp_dir)
-        filename = os.path.join(bp.static_folder, 'temp/' + filename)
+        filename = os.path.join(static_temp_dir, filename)
         uploaded_file.save(filename)
         output_img = filter_and_interpolate_data(filename)
-        print(output_img)
 #        os.remove(filename)
     else:
         return redirect(url_for('stick_slip.stick_slip_upload_form'))
-    return render_template('results_view.html', output_img=output_img)
+    return render_template('results_view.html', output_img='temp/' + output_img)
